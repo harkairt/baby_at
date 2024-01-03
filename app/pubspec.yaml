@@ -16,6 +16,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.4.9
+  flutter_staggered_animations: ^1.1.1
   fpdart: ^1.1.0
   freezed: ^2.4.6
   freezed_annotation: ^2.4.1
@@ -28,6 +29,7 @@ dependencies:
   json_serializable: ^6.7.1
   l10n:
     path: ../packages/l10n
+  outline_gradient_button: ^2.0.1+1
   plugger: ^0.0.1
   responsive_builder: ^0.7.0
   riverpod: ^2.4.9
@@ -41,10 +43,11 @@ dependencies:
       ref: 29d931fb1d6f63cd809ab72c22a88ab4520103d7
   theme_tailor: ^2.0.2
   theme_tailor_annotation: ^2.0.2
+  uuid: ^4.2.2
   v_flutter_core:
     git:
       url: https://github.com/Vlabs-development/v_flutter_core
-      ref: master
+      ref: 803604836eef27ef062a775cdb85b79376960af1
 
 dev_dependencies:
   flutter_test:

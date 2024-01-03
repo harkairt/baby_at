@@ -347,6 +347,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.9"
+  flutter_staggered_animations:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_animations
+      sha256: "81d3c816c9bb0dca9e8a5d5454610e21ffb068aedb2bde49d2f8d04f75538351"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -597,6 +605,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  outline_gradient_button:
+    dependency: "direct main"
+    description:
+      name: outline_gradient_button
+      sha256: "006673015f090c314d7a14b41216ed984b21e8b55d0c8eb502d93e0bbd6b65ba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1+1"
   package_config:
     dependency: transitive
     description:
@@ -1092,7 +1108,7 @@ packages:
     source: hosted
     version: "0.1.0"
   uuid:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: uuid
       sha256: "22c94e5ad1e75f9934b766b53c742572ee2677c56bc871d850a57dad0f82127f"
@@ -1103,8 +1119,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: add08652f549d952169523437f88a660cc45f847
+      ref: "803604836eef27ef062a775cdb85b79376960af1"
+      resolved-ref: "803604836eef27ef062a775cdb85b79376960af1"
       url: "https://github.com/Vlabs-development/v_flutter_core"
     source: git
     version: "0.0.1"

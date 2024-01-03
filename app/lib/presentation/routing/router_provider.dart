@@ -1,7 +1,6 @@
 import 'package:app/modules/authentication/ui/is_authentication_guard.dart';
 import 'package:app/modules/profile/ui/is_onboarded_guard.dart';
-import 'package:app/presentation/responsive/nested_navigation.dart';
-import 'package:app/presentation/routing/placeholder_page.dart';
+import 'package:app/modules/time_entries/ui/baby_event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:guarded_go_router/guarded_go_router.dart';
@@ -20,10 +19,7 @@ class R {
 
 final routerProvider = Provider<GuardedGoRouter>(
   (ref) => GuardedGoRouter(
-    guards: [
-      IsAuthenticationGuard(ref.read),
-      IsOnboardedGuard(ref.read),
-    ],
+    guards: [],
     pageWrapper: (child) => Builder(builder: (context) => Plugger.page(context, child)),
     routerWrapper: (child) => child,
     buildRouter: (routes, rootRedirect) {
@@ -44,98 +40,11 @@ final routerProvider = Provider<GuardedGoRouter>(
     },
     routes: [
       R.root(redirect: (context, state) => "/${R.home.path}"),
-      R.login(
-        shieldOf: [IsAuthenticationGuard],
+      R.home(
+        followUp: [IsAuthenticationGuard],
         pageBuilder: trans(
-          (_) => PlaceholderPage(
-            title: 'Login',
-            body: OutlinedButton(
-              onPressed: () => ref.read(authenticationProvider.notifier).state = true,
-              child: const Text('Let me in!'),
-            ),
-          ),
+          (_) => const BabyEventPage(),
         ),
-      ),
-      GuardShell<IsAuthenticationGuard>(
-        [
-          StatefulShellRoute.indexedStack(
-            pageBuilder: (context, state, navigationShell) => buildDefaultTransitionPage<void>(
-              context: context,
-              state: state,
-              child: NestedNavigation(navigationShell: navigationShell),
-            ),
-            branches: [
-              StatefulShellBranch(
-                routes: [
-                  R.home(
-                    followUp: [IsAuthenticationGuard],
-                    pageBuilder: trans(
-                      (_) => PlaceholderPage(
-                        title: 'Dashboard',
-                        body: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.dashboard),
-                            const SizedBox(width: 16),
-                            Builder(
-                              builder: (context) {
-                                return IconButton(
-                                  icon: const Icon(Icons.arrow_forward),
-                                  onPressed: () {
-                                    GoRouter.of(context).goNamed(R.details.name);
-                                  },
-                                );
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    routes: [
-                      R.details(
-                        pageBuilder: trans(
-                          (_) => const PlaceholderPage(
-                            title: 'Details',
-                            body: Icon(Icons.book),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              StatefulShellBranch(
-                routes: [
-                  R.onboarding(
-                    shieldOf: [IsOnboardedGuard],
-                    pageBuilder: trans(
-                      (_) => PlaceholderPage(
-                        title: 'Who are you?',
-                        body: ElevatedButton(
-                          onPressed: () => ref.read(isOnboardedProvider.notifier).state = true,
-                          child: const Text('I am John Doe!'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  GuardShell<IsOnboardedGuard>([
-                    R.profile(
-                      followUp: [IsOnboardedGuard],
-                      pageBuilder: trans(
-                        (_) => const PlaceholderPage(
-                          title: 'Profile',
-                          body: Text('Hey John Doe! 👋'),
-                        ),
-                      ),
-                    ),
-                  ]),
-                ],
-              )
-            ],
-          ),
-        ],
       )
     ],
   ),
