@@ -4,17 +4,36 @@ import 'package:flutter/material.dart';
 class BabyEventRow extends StatelessWidget {
   const BabyEventRow({
     required this.event,
+    required this.onDelete,
     super.key,
   });
 
   final BabyEvent event;
+  final void Function() onDelete;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: event.type.icon,
       title: Text(_formatTime(event.date)),
-      subtitle: Text(_formatDate(event.date)),
+      subtitle: Text(
+        _formatDate(event.date),
+        style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+      ),
+      onLongPress: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Törlés?'),
+            action: SnackBarAction(
+              label: 'Igen',
+              onPressed: () {
+                onDelete();
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

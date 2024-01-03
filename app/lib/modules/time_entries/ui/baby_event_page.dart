@@ -15,13 +15,17 @@ class BabyEventPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
 
-    void addEvent(BabyEventType type) {
+    void addEvent(BabyEventType type) async {
       ref.watch(babyEventsProvider.notifier).add(type);
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 175),
-        curve: Curves.easeInOut,
-      );
+
+      // post frame callback
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent + 1000,
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.easeInOut,
+        );
+      });
     }
 
     return Scaffold(
@@ -39,6 +43,7 @@ class BabyEventPage extends HookConsumerWidget {
                       return ListView.builder(
                         controller: scrollController,
                         itemCount: events.length,
+                        physics: const ClampingScrollPhysics(),
                         itemBuilder: (context, index) {
                           final event = events[index];
                           return AnimationConfiguration.staggeredList(
@@ -47,7 +52,12 @@ class BabyEventPage extends HookConsumerWidget {
                             child: SlideAnimation(
                               verticalOffset: 20.0,
                               child: FadeInAnimation(
-                                child: BabyEventRow(event: event),
+                                child: BabyEventRow(
+                                  event: event,
+                                  onDelete: () {
+                                    ref.watch(babyEventsProvider.notifier).remove(event.id);
+                                  },
+                                ),
                               ),
                             ),
                           );
@@ -58,39 +68,51 @@ class BabyEventPage extends HookConsumerWidget {
                 },
               ),
             ),
-            Wide(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Center(
-                  child: GapRow(
-                    gap: 24,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.baby_changing_station),
-                        onPressed: () {
-                          addEvent(BabyEventType.changeDiaper);
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.bedtime_outlined),
-                        onPressed: () {
-                          addEvent(BabyEventType.fallAsleep);
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.wb_sunny_outlined),
-                        onPressed: () {
-                          addEvent(BabyEventType.wakeUp);
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )
           ],
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            // outline decoration
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(
+                color: Colors.yellow,
+                width: 2,
+                
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: GapRow(
+                gap: 24,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.baby_changing_station),
+                    onPressed: () {
+                      addEvent(BabyEventType.changeDiaper);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.bedtime_outlined),
+                    onPressed: () {
+                      addEvent(BabyEventType.fallAsleep);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.wb_sunny_outlined),
+                    onPressed: () {
+                      addEvent(BabyEventType.wakeUp);
+                    },
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

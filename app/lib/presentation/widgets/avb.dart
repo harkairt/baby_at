@@ -228,8 +228,8 @@ class _DebugLoadingOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: Positioned.fill(
+    return Positioned.fill(
+      child: IgnorePointer(
         child: AnimatedOpacity(
           opacity: isLoading ? 0.4 : 0,
           duration: const Duration(milliseconds: 300),
