@@ -1,0 +1,9 @@
+name: baby_at_workspace
+
+environment:
+  sdk: ">=3.2.0"
+dev_dependencies:
+  custom_lint: ^0.5.7
+  flutter_lints: ^3.0.1
+  melos: ^3.4.0
+

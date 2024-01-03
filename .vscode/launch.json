@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🌐 app",
+            "program": "app/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "8889",
+            ],
+        },
+        {
+            "name": "🌐 app (release)",
+            "program": "app/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "8889",
+                "--release",
+            ],
+        },
+        {
+            "name": "📱 app",
+            "program": "app/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "HOST=$(ipconfig getifaddr en0)",
+            ]
+        },
+    ]
+}

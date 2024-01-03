@@ -1,0 +1,42 @@
+name: baby_at_workspace
+
+packages:
+  - packages/l10n/packages/l10n
+  - app
+
+scripts:
+  analyze:
+    exec: dart analyze
+
+  fix:
+    exec: dart fix --apply
+
+  get:
+    exec: flutter pub get
+
+  clean:
+    exec: flutter clean
+
+  clean_get:
+    exec: flutter clean && flutter pub get
+
+  gen:
+    run: melos exec -c 1 --depends-on="build_runner" -- "flutter pub run build_runner build --delete-conflicting-outputs"
+
+  clean_get_gen:
+    run: melos run clean_get && melos run gen
+
+  l10n:
+    run: melos exec --scope="l10n" -- "rm -rf lib/generated/intl && rm lib/generated/l10n.dart && flutter pub run intl_utils:localizely_download && flutter pub run intl_utils:generate"
+
+  format_files:
+    run: find $MELOS_ROOT_PATH -type f | grep '.dart$' | grep -vE '.freezed.dart|.g.dart|.gr.dart|.gql.dart' | xargs dart format -l 120
+
+  upgrade:
+    exec: flutter pub upgrade
+
+  build_watch:
+    exec: flutter pub run build_runner watch --delete-conflicting-outputs
+
+  upgrade_major:
+    exec: flutter pub upgrade --major-versions
