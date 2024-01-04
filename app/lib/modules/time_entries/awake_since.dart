@@ -10,9 +10,9 @@ FutureOr<Duration?> awakeSince(AwakeSinceRef ref) async {
   final events = await ref.watch(babyEventsProvider.future);
 
   final sleepEvents = events.where((e) => e.type == BabyEventType.fallAsleep || e.type == BabyEventType.wakeUp);
-  final lastEvent = sleepEvents.last;
+  final lastEvent = sleepEvents.lastOrNull;
 
-  if (lastEvent.type == BabyEventType.fallAsleep) {
+  if (lastEvent == null || lastEvent.type == BabyEventType.fallAsleep) {
     return null;
   }
 

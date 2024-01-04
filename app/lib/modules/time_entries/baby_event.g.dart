@@ -24,5 +24,5 @@ const _$BabyEventTypeEnumMap = {
   BabyEventType.wakeUp: 'wakeUp',
   BabyEventType.fallAsleep: 'fallAsleep',
   BabyEventType.changeDiaper: 'changeDiaper',
-  BabyEventType.breastFeeding: 'breastFeeding',
+  BabyEventType.breastfeeding: 'breastfeeding',
 };

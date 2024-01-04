@@ -21,7 +21,7 @@ enum BabyEventType {
   wakeUp,
   fallAsleep,
   changeDiaper,
-  breastFeeding,
+  breastfeeding,
 }
 
 extension BabyEventTypeX on BabyEventType {
@@ -33,7 +33,7 @@ extension BabyEventTypeX on BabyEventType {
         return Icon(iconData);
       case BabyEventType.changeDiaper:
         return Icon(iconData);
-      case BabyEventType.breastFeeding:
+      case BabyEventType.breastfeeding:
         return Icon(iconData);
     }
   }
@@ -46,7 +46,7 @@ extension BabyEventTypeX on BabyEventType {
         return Icons.bedtime_outlined;
       case BabyEventType.changeDiaper:
         return Icons.baby_changing_station;
-      case BabyEventType.breastFeeding:
+      case BabyEventType.breastfeeding:
         return Symbols.breastfeeding;
     }
   }

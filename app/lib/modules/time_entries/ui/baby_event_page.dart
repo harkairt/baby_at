@@ -2,6 +2,8 @@ import 'package:app/modules/time_entries/asleep_since.dart';
 import 'package:app/modules/time_entries/awake_since.dart';
 import 'package:app/modules/time_entries/baby_event.dart';
 import 'package:app/modules/time_entries/baby_events.dart';
+import 'package:app/modules/time_entries/last_breastfeeding_since.dart';
+import 'package:app/modules/time_entries/last_diaper_change_since.dart';
 import 'package:app/modules/time_entries/ui/baby_event_row.dart';
 import 'package:app/presentation/theme/preferred_theme_mode_provider.dart';
 import 'package:app/presentation/widgets/avb.dart';
@@ -169,16 +171,38 @@ class BabyEventPage extends HookConsumerWidget {
                         );
                       },
                     ),
-                    IconButton(
-                      icon: BabyEventType.changeDiaper.icon,
-                      onPressed: () {
-                        addEvent(BabyEventType.changeDiaper);
+                    AVB(
+                      value: ref.watch(lastDiaperChangeSinceProvider),
+                      available: (context, value, isLoading) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: BabyEventType.changeDiaper.icon,
+                              onPressed: () {
+                                addEvent(BabyEventType.changeDiaper);
+                              },
+                            ),
+                            Text(_formatDuration(value)),
+                          ],
+                        );
                       },
                     ),
-                    IconButton(
-                      icon: BabyEventType.breastFeeding.icon,
-                      onPressed: () {
-                        addEvent(BabyEventType.breastFeeding);
+                    AVB(
+                      value: ref.watch(lastBreastfeedingSinceProvider),
+                      available: (context, value, isLoading) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: BabyEventType.breastfeeding.icon,
+                              onPressed: () {
+                                addEvent(BabyEventType.breastfeeding);
+                              },
+                            ),
+                            Text(_formatDuration(value)),
+                          ],
+                        );
                       },
                     ),
                   ],

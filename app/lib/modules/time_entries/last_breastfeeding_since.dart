@@ -2,21 +2,21 @@ import 'package:app/modules/time_entries/baby_event.dart';
 import 'package:app/modules/time_entries/baby_events.dart';
 import 'package:app/modules/time_entries/now_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:collection/collection.dart';
 
-part 'asleep_since.g.dart';
+part 'last_breastfeeding_since.g.dart';
 
 @riverpod
-FutureOr<Duration?> asleepSince(AsleepSinceRef ref) async {
+FutureOr<Duration?> lastBreastfeedingSince(LastBreastfeedingSinceRef ref) async {
   final events = await ref.watch(babyEventsProvider.future);
 
-  final sleepEvents = events.where((e) => e.type == BabyEventType.fallAsleep || e.type == BabyEventType.wakeUp);
-  final lastEvent = sleepEvents.lastOrNull;
+  final lastBreastfeeding = events.lastWhereOrNull((element) => element.type == BabyEventType.breastfeeding);
 
-  if (lastEvent == null || lastEvent.type == BabyEventType.wakeUp) {
+  if (lastBreastfeeding == null) {
     return null;
   }
 
   final now = ref.watch(nowProvider);
 
-  return now.difference(lastEvent.date);
+  return now.difference(lastBreastfeeding.date);
 }
