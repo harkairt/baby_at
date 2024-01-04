@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 part 'baby_event.freezed.dart';
 part 'baby_event.g.dart';
@@ -21,6 +21,7 @@ enum BabyEventType {
   wakeUp,
   fallAsleep,
   changeDiaper,
+  breastFeeding,
 }
 
 extension BabyEventTypeX on BabyEventType {
@@ -31,6 +32,8 @@ extension BabyEventTypeX on BabyEventType {
       case BabyEventType.fallAsleep:
         return Icon(iconData);
       case BabyEventType.changeDiaper:
+        return Icon(iconData);
+      case BabyEventType.breastFeeding:
         return Icon(iconData);
     }
   }
@@ -43,6 +46,8 @@ extension BabyEventTypeX on BabyEventType {
         return Icons.bedtime_outlined;
       case BabyEventType.changeDiaper:
         return Icons.baby_changing_station;
+      case BabyEventType.breastFeeding:
+        return Symbols.breastfeeding;
     }
   }
 }

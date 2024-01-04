@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
+  collection: ^1.18.0
   dio: ^5.4.0
   entry: ^0.0.9
   fast_immutable_collections: ^9.2.0
@@ -30,6 +31,7 @@ dependencies:
   json_serializable: ^6.7.1
   l10n:
     path: ../packages/l10n
+  material_symbols_icons: ^4.2713.0
   outline_gradient_button: ^2.0.1+1
   plugger: ^0.0.1
   responsive_builder: ^0.7.0
