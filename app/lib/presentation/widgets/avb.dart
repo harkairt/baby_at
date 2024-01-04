@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/foundation.dart';
 
-const showDebugLoadingOverlay = true;
+const showDebugLoadingOverlay = false;
 
 typedef ErrorBuilder = Widget Function(BuildContext context, Object? error, StackTrace stack, bool isLoading);
 typedef LoadingBuilder = Widget Function(BuildContext context);

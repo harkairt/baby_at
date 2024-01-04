@@ -107,7 +107,7 @@ class BabyEventPage extends HookConsumerWidget {
                   backgroundColor: MaterialStateProperty.resolveWith(
                     (states) {
                       if (states.contains(MaterialState.selected)) {
-                        return Theme.of(context).colorScheme.primaryContainer;
+                        return Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5);
                       }
 
                       return null;
@@ -115,7 +115,7 @@ class BabyEventPage extends HookConsumerWidget {
                   ),
                   foregroundColor: MaterialStateProperty.resolveWith(
                     (states) {
-                      return Theme.of(context).colorScheme.onPrimary;
+                      return Theme.of(context).colorScheme.primary;
                     },
                   ),
                 ),

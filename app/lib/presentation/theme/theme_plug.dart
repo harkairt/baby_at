@@ -24,7 +24,7 @@ class ThemePlug extends Plug {
       .copyWith(buttonTheme: const ButtonThemeData(minWidth: 300))
       .copyWith(filledButtonTheme: const FilledButtonThemeData());
 
-  ThemeData? get darkTheme => FlexThemeData.dark(scheme: FlexScheme.ebonyClay, useMaterial3: true);
+  ThemeData? get darkTheme => FlexThemeData.dark(scheme: FlexScheme.gold, useMaterial3: true);
 
   @override
   Widget navigatorPlug(BuildContext context, Widget child) {
